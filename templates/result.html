@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Recommended Crop: 🌱 {{ crop }}</h1>
+        <canvas id="myChart" width="400" height="200"></canvas>
+        <br>
+        <a href="/">🔙 Back</a>
+    </div>
+
+    <script>
+        // ✅ Flask injects a JSON list here as a string, then JS parses it
+        const values = JSON.parse('{{ values | tojson | safe }}');
+
+        const ctx = document.getElementById("myChart").getContext("2d");
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Nitrogen", "Phosphorus", "Potassium", "pH", "Rainfall", "Temperature", "Humidity"],
+                datasets: [{
+                    label: "Input Values",
+                    data: values,
+                    backgroundColor: "rgba(75, 192, 192, 0.7)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
