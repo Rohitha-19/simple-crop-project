@@ -2,8 +2,6 @@ from flask import Flask, render_template, request
 import random
 
 app = Flask(__name__)
-
-# Dummy crop recommendation logic (replace with ML later)
 def recommend_crop(N, P, K, ph, rainfall, temp, humidity):
     crops = ["Rice", "Wheat", "Maize", "Sugarcane", "Cotton", "Millets", "Pulses"]
     return random.choice(crops)
@@ -24,10 +22,11 @@ def predict():
 
     crop = recommend_crop(N, P, K, ph, rainfall, temp, humidity)
 
-    # Pass values to result page
+    #values to result page
     return render_template("result.html", 
                            crop=crop,
                            values=[N, P, K, ph, rainfall, temp, humidity])
 
 if __name__ == "__main__":
+
     app.run(debug=True)
