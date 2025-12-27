@@ -15,7 +15,6 @@
     </div>
 
     <script>
-        // ✅ Flask injects a JSON list here as a string, then JS parses it
         const values = JSON.parse('{{ values | tojson | safe }}');
 
         const ctx = document.getElementById("myChart").getContext("2d");
@@ -40,4 +39,5 @@
         });
     </script>
 </body>
+
 </html>
